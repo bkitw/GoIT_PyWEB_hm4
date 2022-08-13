@@ -46,323 +46,228 @@ def handle_folders(folder: Path):
 
 
 class Images:
+    collection_of_images = {}
 
-    @staticmethod
-    def thread_jpeg_loop(folder: Path):
+    def __init__(self, files):
+        self.collection_of_images = {'images': [
+            files['KNOWN_EXT']['JPEG'],
+            files['KNOWN_EXT']['BMP'],
+            files['KNOWN_EXT']['PNG'],
+            files['KNOWN_EXT']['JPG'],
+            files['KNOWN_EXT']['SVG'],
+        ]}
+
+    def thread_image_loop(self, folder: Path):
         with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            # feature = list(executor.submit(handle_media, file, folder / 'images') for file in collector.JPEG_IMAGES)
-
-            for file in collector.JPEG_IMAGES:
-                executor.submit(handle_media, file, folder / 'images')
-
-    @staticmethod
-    def thread_jpg_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.JPG_IMAGES:
-                executor.submit(handle_media, file, folder / 'images')
-
-    @staticmethod
-    def thread_png_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.PNG_IMAGES:
-                executor.submit(handle_media, file, folder / 'images')
-
-    @staticmethod
-    def thread_svg_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.SVG_IMAGES:
-                executor.submit(handle_media, file, folder / 'images')
-
-    @staticmethod
-    def thread_bmp_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.BMP_IMAGES:
-                executor.submit(handle_media, file, folder / 'images')
+            for collection, values in self.collection_of_images.items():
+                for ext in values:
+                    for file in ext:
+                        executor.submit(handle_media, file, folder / collection)
 
 
 ...
 
 
 class Audio:
+    collection_of_audio = {}
 
-    @staticmethod
-    def thread_mp3_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.MP3_AUDIO:
-                executor.submit(handle_media, file, folder / 'audio')
+    def __init__(self, files):
+        self.collection_of_audio = {'audio': [
+            files['KNOWN_EXT']['MP3'],
+            files['KNOWN_EXT']['WAV'],
+            files['KNOWN_EXT']['AMR'],
+            files['KNOWN_EXT']['OGG'],
+            files['KNOWN_EXT']['FLAC'],
+        ]}
 
-    @staticmethod
-    def thread_wav_loop(folder: Path):
+    def thread_audio_loop(self, folder: Path):
         with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.WAV_AUDIO:
-                executor.submit(handle_media, file, folder / 'audio')
-
-    @staticmethod
-    def thread_ogg_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.OGG_AUDIO:
-                executor.submit(handle_media, file, folder / 'audio')
-
-    @staticmethod
-    def thread_amr_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.AMR_AUDIO:
-                executor.submit(handle_media, file, folder / 'audio')
-
-    @staticmethod
-    def thread_flac_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.FLAC_AUDIO:
-                executor.submit(handle_media, file, folder / 'audio')
+            for collection, values in self.collection_of_audio.items():
+                for ext in values:
+                    for file in ext:
+                        executor.submit(handle_media, file, folder / collection)
 
 
 ...
 
 
 class Video:
+    collection_of_video = {}
 
-    @staticmethod
-    def thread_mp4_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.MP4_VIDEOS:
-                executor.submit(handle_media, file, folder / 'video')
+    def __init__(self, files):
+        self.collection_of_video = {'video': [
+            files['KNOWN_EXT']['3GP'],
+            files['KNOWN_EXT']['MP4'],
+            files['KNOWN_EXT']['MOV'],
+            files['KNOWN_EXT']['MKV'],
+            files['KNOWN_EXT']['AVI'],
+        ]}
 
-    @staticmethod
-    def thread_3gp_loop(folder: Path):
+    def thread_video_loop(self, folder: Path):
         with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.VIDEOS_IN_3GP:
-                executor.submit(handle_media, file, folder / 'video')
-
-    @staticmethod
-    def thread_avi_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.AVI_VIDEOS:
-                executor.submit(handle_media, file, folder / 'video')
-
-    @staticmethod
-    def thread_mov_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.MOV_VIDEOS:
-                executor.submit(handle_media, file, folder / 'video')
-
-    @staticmethod
-    def thread_mkv_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.MKV_VIDEOS:
-                executor.submit(handle_media, file, folder / 'video')
+            for collection, values in self.collection_of_video.items():
+                for ext in values:
+                    for file in ext:
+                        executor.submit(handle_media, file, folder / collection)
 
 
 class Documents:
+    collection_of_documents = {}
 
-    @staticmethod
-    def thread_txt_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.TXT_DOCS:
-                executor.submit(handle_media, file, folder / 'documents')
+    def __init__(self, files):
+        self.collection_of_documents = {'documents': [
+            files['KNOWN_EXT']['DOC'],
+            files['KNOWN_EXT']['DOCX'],
+            files['KNOWN_EXT']['MPP'],
+            files['KNOWN_EXT']['TXT'],
+            files['KNOWN_EXT']['XLSX'],
+            files['KNOWN_EXT']['PPTX'],
+            files['KNOWN_EXT']['PDF'],
+        ]}
 
-    @staticmethod
-    def thread_doc_loop(folder: Path):
+    def thread_documents_loop(self, folder: Path):
         with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.DOC_DOCS:
-                executor.submit(handle_media, file, folder / 'documents')
-
-    @staticmethod
-    def thread_docx_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.DOCX_DOCS:
-                executor.submit(handle_media, file, folder / 'documents')
-
-    @staticmethod
-    def thread_mpp_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.MPP_DOCS:
-                executor.submit(handle_media, file, folder / 'documents')
-
-    @staticmethod
-    def thread_pdf_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.PDF_DOCS:
-                executor.submit(handle_media, file, folder / 'documents')
-
-    @staticmethod
-    def thread_pptx_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.PPTX_DOCS:
-                executor.submit(handle_media, file, folder / 'documents')
-
-    @staticmethod
-    def thread_xlsx_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.XLSX_DOCS:
-                executor.submit(handle_media, file, folder / 'documents')
+            for collection, values in self.collection_of_documents.items():
+                for ext in values:
+                    for file in ext:
+                        executor.submit(handle_media, file, folder / collection)
 
 
 class TorrentPythonExe:
-    @staticmethod
-    def thread_torrent_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.TORRENT_TYPE:
-                executor.submit(handle_media, file, folder / 'torrents')
+    collection_of_torrent_python_exe = {}
 
-    @staticmethod
-    def thread_application_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.APP_TYPE:
-                executor.submit(handle_media, file, folder / 'applications')
+    def __init__(self, files):
+        self.collection_of_torrent_python_exe = {
+            'torrents':
+                files['KNOWN_EXT']['TORRENT'],
+            'python_scripts':
+                files['KNOWN_EXT']['PY'],
+            'applications':
+                files['KNOWN_EXT']['EXE']
+        }
 
-    @staticmethod
-    def thread_python_loop(folder: Path):
+    def thread_tpe_loop(self, folder: Path):
         with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.PYTHON_TYPE:
-                executor.submit(handle_media, file, folder / 'python_scripts')
+            for collection, values in self.collection_of_torrent_python_exe.items():
+                for file in values:
+                    executor.submit(handle_media, file, folder / collection)
 
 
 class AnotherTypes:
+    def __init__(self, files):
+        self.unknown_files = files['UNKNOWN_EXT']
 
-    @staticmethod
-    def thread_unknown_loop(folder: Path):
+    def thread_unknown_loop(self, folder: Path):
         with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.ANOTHER_TYPES:
+            for file in self.unknown_files:
                 executor.submit(handle_media, file, folder / 'uncertain_types')
 
 
 class Archives:
+    collection_of_archives = {}
 
-    @staticmethod
-    def thread_zip_loop(folder: Path):
+    def __init__(self, files):
+        self.collection_of_archives = {'archives': [
+            files['KNOWN_EXT']['GZ'],
+            files['KNOWN_EXT']['RAR'],
+            files['KNOWN_EXT']['ZIP'],
+            files['KNOWN_EXT']['ISO'],
+            files['KNOWN_EXT']['TAR'],
+
+        ]}
+
+    def thread_archive_loop(self, folder: Path):
         with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.ZIP_ARCHIVES:
-                executor.submit(handle_archives, file, folder / 'archives')
+            for collection, values in self.collection_of_archives.items():
+                for ext in values:
+                    for file in ext:
+                        executor.submit(handle_archives, file, folder / collection)
 
-    @staticmethod
-    def thread_iso_loop(folder: Path):
+
+...
+
+
+class Folders:
+    def __init__(self, files):
+        self.folders = files['FOLDERS'][::-1]
+
+    def thread_for_folders(self, folder: Path):
         with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.ISO_ARCHIVES:
-                executor.submit(handle_archives, file, folder / 'archives')
-
-    @staticmethod
-    def thread_rar_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.RAR_ARCHIVES:
-                executor.submit(handle_archives, file, folder / 'archives')
-
-    @staticmethod
-    def thread_gz_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.GZ_ARCHIVES:
-                executor.submit(handle_archives, file, folder / 'archives')
-
-    @staticmethod
-    def thread_tar_loop(folder: Path):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-            for file in collector.TAR_ARCHIVES:
-                executor.submit(handle_archives, file, folder / 'archives')
-
-
-def thread_for_folders(folder: Path):
-    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-        for folder in collector.FOLDERS[::-1]:
-            executor.submit(handle_folders, folder, folder)
+            for folder in self.folders:
+                executor.submit(handle_folders, folder)
 
 
 def main(folder: Path):
-    collector.searcher(folder)
-    thread_jpeg = Thread(target=Images.thread_jpeg_loop, args=(folder,))
-    thread_jpg = Thread(target=Images.thread_jpg_loop, args=(folder,))
-    thread_png = Thread(target=Images.thread_png_loop, args=(folder,))
-    thread_svg = Thread(target=Images.thread_svg_loop, args=(folder,))
-    thread_bmp = Thread(target=Images.thread_bmp_loop, args=(folder,))
-    thread_jpeg.start()
-    thread_jpg.start()
-    thread_png.start()
-    thread_svg.start()
-    thread_bmp.start()
-    ...
-    thread_mp3 = Thread(target=Audio.thread_mp3_loop, args=(folder,))
-    thread_wav = Thread(target=Audio.thread_wav_loop, args=(folder,))
-    thread_ogg = Thread(target=Audio.thread_ogg_loop, args=(folder,))
-    thread_amr = Thread(target=Audio.thread_amr_loop, args=(folder,))
-    thread_flac = Thread(target=Audio.thread_flac_loop, args=(folder,))
-    thread_mp3.start()
-    thread_wav.start()
-    thread_ogg.start()
-    thread_amr.start()
-    thread_flac.start()
+
+    files = collector.sorter(folder)
+
+    images_object = Images(files)
+    thread_images = Thread(target=images_object.thread_image_loop, args=(folder,))
+    thread_images.start()
 
     ...
-
-    thread_mp4 = Thread(target=Video.thread_mp4_loop, args=(folder,))
-    thread_3gp = Thread(target=Video.thread_3gp_loop, args=(folder,))
-    thread_avi = Thread(target=Video.thread_avi_loop, args=(folder,))
-    thread_mov = Thread(target=Video.thread_mov_loop, args=(folder,))
-    thread_mkv = Thread(target=Video.thread_mkv_loop, args=(folder,))
-    thread_mp4.start()
-    thread_3gp.start()
-    thread_avi.start()
-    thread_mov.start()
-    thread_mkv.start()
+    audio_object = Audio(files)
+    thread_audio = Thread(target=audio_object.thread_audio_loop, args=(folder,))
+    thread_audio.start()
 
     ...
-
-    thread_txt = Thread(target=Documents.thread_txt_loop, args=(folder,))
-    thread_doc = Thread(target=Documents.thread_doc_loop, args=(folder,))
-    thread_docx = Thread(target=Documents.thread_docx_loop, args=(folder,))
-    thread_mpp = Thread(target=Documents.thread_mpp_loop, args=(folder,))
-    thread_pdf = Thread(target=Documents.thread_pdf_loop, args=(folder,))
-    thread_xlsx = Thread(target=Documents.thread_xlsx_loop, args=(folder,))
-    thread_pptx = Thread(target=Documents.thread_pptx_loop, args=(folder,))
-    thread_doc.start()
-    thread_docx.start()
-    thread_txt.start()
-    thread_mpp.start()
-    thread_pdf.start()
-    thread_xlsx.start()
-    thread_pptx.start()
+    video_object = Video(files)
+    thread_video = Thread(target=video_object.thread_video_loop, args=(folder,))
+    thread_video.start()
 
     ...
-
-    thread_torrent = Thread(target=TorrentPythonExe.thread_torrent_loop, args=(folder,))
-    thread_app = Thread(target=TorrentPythonExe.thread_application_loop, args=(folder,))
-    thread_python_script = Thread(target=TorrentPythonExe.thread_python_loop, args=(folder,))
-    thread_torrent.start()
-    thread_app.start()
-    thread_python_script.start()
+    documents_object = Documents(files)
+    thread_documents = Thread(target=documents_object.thread_documents_loop, args=(folder,))
+    thread_documents.start()
 
     ...
+    three_in_one_object = TorrentPythonExe(files)
+    thread_3in1 = Thread(target=three_in_one_object.thread_tpe_loop, args=(folder,))
+    thread_3in1.start()
 
-    thread_unknown_type = Thread(target=AnotherTypes.thread_unknown_loop, args=(folder,))
+    ...
+    unknown_type_object = AnotherTypes(files)
+    thread_unknown_type = Thread(target=unknown_type_object.thread_unknown_loop, args=(folder,))
     thread_unknown_type.start()
-
     ...
-    thread_zip = Thread(target=Archives.thread_zip_loop, args=(folder,))
-    thread_iso = Thread(target=Archives.thread_iso_loop, args=(folder,))
-    thread_rar = Thread(target=Archives.thread_rar_loop, args=(folder,))
-    thread_gz = Thread(target=Archives.thread_gz_loop, args=(folder,))
-    thread_tar = Thread(target=Archives.thread_tar_loop, args=(folder,))
-    thread_zip.start()
-    thread_iso.start()
-    thread_rar.start()
-    thread_gz.start()
-    thread_tar.start()
+    archives_object = Archives(files)
+    thread_archives = Thread(target=archives_object.thread_archive_loop, args=(folder,))
+    thread_archives.start()
     ...
-    thread_folders = Thread(target=thread_for_folders, args=(folder,))
+    thread_images.join()
+    thread_audio.join()
+    thread_documents.join()
+    thread_video.join()
+    thread_archives.join()
+    thread_3in1.join()
+    thread_unknown_type.join()
+    ...
+    folders_object = Folders(files)
+    thread_folders = Thread(target=folders_object.thread_for_folders, args=(folder,))
     thread_folders.start()
     ...
+    return files
 
 
 if __name__ == '__main__':
     if sys.argv[1]:
         folder_for_scan = Path(sys.argv[1])
         print(f'Sorting will start in folder -- {folder_for_scan.resolve()}')
-        main(folder_for_scan.resolve())
+        data = main(folder_for_scan.resolve())
 
         print('Names of all files was changed from cyrillic to latin.')
-        for i in tqdm(collector.ALL_THAT_I_FOUND, desc="Sorting progress", colour='green'):
+        for i in tqdm(data, desc="Sorting progress", colour='green'):
             time.sleep(0.5)
+        for j in tqdm(data['KNOWN_EXT'], desc="Sorting known files", colour="blue"):
+            time.sleep(0.1)
+        for k in tqdm(data['UNKNOWN_EXT'], desc="Sorting unknown files", colour="magenta"):
+            time.sleep(0.1)
+
         time.sleep(2)
-        print(f'And so we have this extensions in this folder:\n{collector.EXTENSIONS}\nThose files was'
-              f'removed to correspond folders.')
+        # print(f'And so we have these extensions in this folder:\n{collector.EXTENSIONS}\nThose files was '
+        #       f'removed to correspond folders.')
+        # time.sleep(1)
+        # print(f'And files with these extensions we couldn\'t sort:\n{collector.UNKNOWN}\nYou can find '
+        #       f'them in folder "uncertain_types".')
         time.sleep(1)
-        print(f'And files with this extensions we couldn\'t sort:\n{collector.UNKNOWN}\nYou can find '
-              f'them in folder "uncertain_types".')
         print('Sorting finished!')
